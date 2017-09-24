@@ -10,69 +10,69 @@ printf "Installing NITE\n"
 printf "***************\n\n"
 
 printf "Copying shared libraries... "
-cp Bin/libXnVNite*$LIBEXT /usr/lib
-cp Bin/libXnVCNITE*$LIBEXT /usr/lib
-cp Bin/libXnVNITE.jni*$LIBEXT /usr/lib
+cp Bin/libXnVNite*$LIBEXT /usr/local/lib
+cp Bin/libXnVCNITE*$LIBEXT /usr/local/lib
+cp Bin/libXnVNITE.jni*$LIBEXT /usr/local/lib
 printf "OK\n"
 
 # If samples exist then this is a development installation, so headers are needed
 if [ -e Samples/Build/Makefile ]
 then
 	printf "Copying includes... "
-	mkdir -p /usr/include/nite
-	cp Include/* /usr/include/nite
+	mkdir -p /usr/local/include/nite
+	cp Include/* /usr/local/include/nite
 	printf "OK\n"
 fi
 
 printf "Installing java bindings... "
-cp Bin/com.primesense.NITE.jar /usr/share/java/
+cp Bin/com.primesense.NITE.jar /usr/local/share/java/
 printf "OK\n"
 
 for fdir in `ls -1 | grep Features`
 do
 	printf "Installing module '$fdir'...\n"
-	mkdir -p /usr/etc/primesense/$fdir
-	cp -r $fdir/Data/* /usr/etc/primesense/$fdir
+	mkdir -p /usr/local/etc/primesense/$fdir
+	cp -r $fdir/Data/* /usr/local/etc/primesense/$fdir
 	for so in `ls -1 $fdir/Bin/lib*$LIBEXT`
 	do
 		base=`basename $so`
 		printf "Registering module '$base'... "
-		cp $so /usr/lib
-		niReg /usr/lib/$base /usr/etc/primesense/$fdir
+		cp $so /usr/local/lib
+		niReg /usr/local/lib/$base /usr/local/etc/primesense/$fdir
 		printf "OK\n"
 	done
 	for bin in `ls -1 $fdir/Bin | grep XnVSceneServer`
 	do
 		printf "Copying XnVSceneServer... "
 		full=$fdir/Bin/$bin
-		cp $full /usr/bin
-		chmod +x /usr/bin/$bin
+		cp $full /usr/local/bin
+		chmod +x /usr/local/bin/$bin
 		printf "OK\n"
 	done
 done
 for hdir in `ls -1 | grep Hands`
 do
 	printf "Installing module '$fdir'\n"
-	mkdir -p /usr/etc/primesense/$hdir
-	cp -r $hdir/Data/* /usr/etc/primesense/$hdir
+	mkdir -p /usr/local/etc/primesense/$hdir
+	cp -r $hdir/Data/* /usr/local/etc/primesense/$hdir
 	for so in `ls -1 $hdir/Bin/lib*$LIBEXT`
 	do
 		base=`basename $so`
 		printf "registering module '$base'..."
-		cp $so /usr/lib
-		niReg /usr/lib/$base /usr/etc/primesense/$hdir
+		cp $so /usr/local/lib
+		niReg /usr/local/lib/$base /usr/local/etc/primesense/$hdir
 		printf "OK\n"
 	done
 done
 
-if [ -f /usr/bin/gmcs ]
+if [ -f /usr/local/bin/gmcs ]
 then
 	printf "Installing .NET wrappers...\n"
 	for net in `ls -1 Bin/*dll`
 	do
 		gacutil -i $net -package 2.0
 		netdll=`basename $net`
-		echo $netdll >> /usr/etc/primesense/XnVNITE.net.dll.list
+		echo $netdll >> /usr/local/etc/primesense/XnVNITE.net.dll.list
 	done
 fi
 

@@ -6,36 +6,37 @@ else
         LIBEXT="so"
 fi
 
-for fmod in `ls -1 /usr/lib/libXnVFeatures*$LIBEXT`
+for fmod in `ls -1 /usr/local/lib/libXnVFeatures*$LIBEXT`
 do
 	niReg -u $fmod
 done
-for hmod in `ls -1 /usr/lib/libXnVHandGenerator*$LIBEXT`
+for hmod in `ls -1 /usr/local/lib/libXnVHandGenerator*$LIBEXT`
 do
 	niReg -u $hmod
 done
 
-rm /usr/lib/libXnVNite*$LIBEXT
-rm /usr/lib/libXnVCNITE*$LIBEXT
-rm /usr/lib/libXnVNITE.jni*$LIBEXT
-rm /usr/lib/libXnVFeatures*$LIBEXT
-rm /usr/lib/libXnVHandGenerator*$LIBEXT
-rm -rf /usr/bin/XnVSceneServer*
-rm -rf /usr/etc/primesense/Features*
-rm -rf /usr/etc/primesense/Hands*
-rm -rf /usr/include/nite/
-rm /usr/share/java/com.primesense.NITE.jar
+rm /usr/local/lib/libXnVNite*$LIBEXT
+rm /usr/local/lib/libXnVCNITE*$LIBEXT
+rm /usr/local/lib/libXnVNITE.jni*$LIBEXT
+rm /usr/local/lib/libXnVFeatures*$LIBEXT
+rm /usr/local/lib/libXnVHandGenerator*$LIBEXT
+rm -rf /usr/local/bin/XnVSceneServer*
+rm -rf /usr/local/etc/primesense/Features*
+rm -rf /usr/local/etc/primesense/Hands*
+rm -rf /usr/local/include/nite/
+rm /usr/local/share/java/com.primesense.NITE.jar
 
-if [ -f /usr/bin/gmcs ]
+
+if [ -f /usr/local/bin/gmcs ]
 then
-	if [ -e /usr/etc/primesense/XnVNITE.net.dll.list ]
+	if [ -e /usr/local/etc/primesense/XnVNITE.net.dll.list ]
 	then
-		for netdll in `cat /usr/etc/primesense/XnVNITE.net.dll.list`
+		for netdll in `cat /usr/local/etc/primesense/XnVNITE.net.dll.list`
 		do
 			netdll=`echo $netdll | sed "s/\.dll//"`
 			gacutil -u $netdll
 		done
-		rm -rf /usr/etc/primesense/XnVNITE.net.dll.list
+		rm -rf /usr/local/etc/primesense/XnVNITE.net.dll.list
 	fi
 fi
 

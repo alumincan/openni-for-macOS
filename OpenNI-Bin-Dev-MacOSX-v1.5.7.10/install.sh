@@ -71,11 +71,11 @@ if [ "$install" = yes ] && [ "$uninstall" = yes ]; then
 	exit 1
 fi
 
-INSTALL_LIB=$rootfs/usr/lib
-INSTALL_BIN=$rootfs/usr/bin
-INSTALL_INC=$rootfs/usr/include/ni
+INSTALL_LIB=$rootfs/usr/local/lib
+INSTALL_BIN=$rootfs/usr/local/bin
+INSTALL_INC=$rootfs/usr/local/include/ni
 INSTALL_VAR=$rootfs/var/lib/ni
-INSTALL_JAR=$rootfs/usr/share/java
+INSTALL_JAR=$rootfs/usr/local/share/java
 
 # make all calls into OpenNI run in this filesystem
 export OPEN_NI_INSTALL_PATH=$rootfs

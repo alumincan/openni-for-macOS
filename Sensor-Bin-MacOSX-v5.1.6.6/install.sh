@@ -70,9 +70,9 @@ if [ "$install" = yes ] && [ "$uninstall" = yes ]; then
 	exit 1
 fi
 
-INSTALL_LIB=$rootfs/usr/lib
-INSTALL_BIN=$rootfs/usr/bin
-INSTALL_ETC=$rootfs/usr/etc/primesense
+INSTALL_LIB=$rootfs/usr/local/lib
+INSTALL_BIN=$rootfs/usr/local/bin
+INSTALL_ETC=$rootfs/usr/local/etc/primesense
 INSTALL_RULES=$rootfs/etc/udev/rules.d
 SERVER_LOGS_DIR=$rootfs/var/log/primesense/XnSensorServer
 
